@@ -6,10 +6,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leoyu</title>
     <link rel="stylesheet" href="styles.css">
+    <Link rel="icon" type="image/ico" href="">
+    <link rel="icon" type="image/png" href="public/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="public/favicon.svg" />
+    <link rel="shortcut icon" href="public/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="public/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 </head>
 
 <body>
-    <h1>Hello world</h1>
+    <main class="dashboard-layout">
+
+        <aside class="left-sidebar">
+
+            <!-- Banner + Pfp -->
+
+            <div class="card profile-header-card">
+                <div class="avatar-container">
+                    <img src="https://via.placeholder.com/150" alt="Profile avatar" class="avatar-img">
+                </div>
+                <div class="banner-container">
+                    <div class="banner-gradient"></div>
+                </div>
+            </div>
+
+            <!-- Bio -->
+
+            <div class="bio-grid">
+                <div class="card bio-card">
+                    <span class="card-tag">BIO</span>
+                    <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, nobis. Suscipit esse minus
+                        recusandae eveniet ratione error tempore. Officiis facilis alias necessitatibus fugit quod nihil
+                        numquam animi ipsa facere placeat.</P>
+                </div>
+
+                <div class="card more-info-card">
+                    <span class="card-tag">Details</span>
+                    <ul class="info-list">
+                        <li><strong>Vibe:</strong> Late Night</li>
+                        <li><strong>Rotations:</strong> Vinyl / FLAC</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Embed Playing-->
+
+            <div class="card now-playing-card">
+                <div class="now-playing-label">
+                    <span class="status-pulse"></span>
+                    <span>now playing . . .</span>
+                </div>
+                <div class="embed-player-wrapper">
+                    <div class="player-placeholder">
+                        <P>Spotify Embed Player</P>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="content-stream">
+
+            <!-- Card 1: Artists I Like-->
+
+            <article class="card topic-card">
+                <header class="card-header">
+                    <span class="card-tag">Heavy Rotation</span>
+                    <h2 class="card-title">Favorite Artists</h2>
+                </header>
+                <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia illo repudiandae obcaecati
+                        rerum facere explicabo ad doloremque minus! Saepe porro dolorum veritatis fugit, voluptatibus
+                        incidunt non fuga facilis nostrum quas.</p>
+                </div>
+            </article>
+
+            <!-- Card 2: Favorite Genres -->
+
+            <article class="card topic-card">
+                <header class="card-header">
+                    <span class="card-tag">Aesthetics</span>
+                    <h2 class="card-title">Genres & Subgenres</h2>
+                </header>
+                <div class="card-body">
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet porro eum pariatur, perspiciatis,
+                        incidunt earum eligendi consequatur mollitia sapiente quaerat nobis libero culpa veritatis
+                        repudiandae voluptatum saepe iure, iusto dolorum?</p>
+                </div>
+            </article>
+
+            <!-- Card 3: Favorite Tracks -->
+            <article class="card topic-card">
+                <header class="card-header">
+                    <span class="card-tag">Soundtrack</span>
+                    <h2 class="card-title">Favorite Tracks</h2>
+                </header>
+                <div class="card-body">
+                    <P>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, ratione cupiditate aut voluptatum
+                        eos repellendus. Deleniti, dolore dignissimos commodi temporibus sequi ullam sit voluptatum
+                        consequuntur quaerat enim dolorem ab aliquam.</P>
+                </div>
+            </article>
+        </section>
+    </main>
 
 
     <script src="index.js"></script>
