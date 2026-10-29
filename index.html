@@ -6,15 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leoyu</title>
     <link rel="stylesheet" href="styles.css">
-    <Link rel="icon" type="image/ico" href="">
-    <link rel="icon" type="image/png" href="public/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="public/favicon.svg" />
-    <link rel="shortcut icon" href="public/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="public/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="public/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="public/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="public/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="public/favicon/site.webmanifest" />
 </head>
 
 <body>
+
+    <!-- Star BG-->
+
+    <div class="stars-cont" aria-hidden="true">
+        <div class="stars-layer stars-distant"></div>
+        <div class="stars-layer stars-small"></div>
+        <div class="stars-layer stars-bright"></div>
+    </div>
+
     <main class="dashboard-layout">
 
         <aside class="left-sidebar">
@@ -22,12 +32,22 @@
             <!-- Banner + Pfp -->
 
             <div class="card profile-header-card">
-                <div class="avatar-container">
-                    <img src="https://via.placeholder.com/150" alt="Profile avatar" class="avatar-img">
+                <div class="profile-identity">
+                    <div class="avatar-container">
+                        <img src="public/pfp+banner/pfp.jpg" alt="Profile avatar" class="avatar-img">
+                        <div class="avatar-overlay"></div>
+                    </div>
+                    <div class="user-meta">
+                        <h1 class="user-name">Leoyu</h1>
+                        <span class="user-handle" title="Copy user">@ayoyuta</span>
+                    </div>
                 </div>
                 <div class="banner-container">
-                    <div class="banner-gradient"></div>
+                    <img src="public/pfp+banner/banner.jpg" alt="Profile banner" class="banner-img">
+                    <div class="banner-overlay"></div>
                 </div>
+
+                <time class="profile-date" id="profile-date">Oct 27</time>
             </div>
 
             <!-- Bio -->
@@ -43,7 +63,7 @@
                 <div class="card more-info-card">
                     <span class="card-tag">Details</span>
                     <ul class="info-list">
-                        <li><strong>Vibe:</strong> Late Night</li>
+                        <li><strong>Vibe:</strong> <span class="activity-status">Late Night</span></li>
                         <li><strong>Rotations:</strong> Vinyl / FLAC</li>
                     </ul>
                 </div>
@@ -53,12 +73,13 @@
 
             <div class="card now-playing-card">
                 <div class="now-playing-label">
-                    <span class="status-pulse"></span>
-                    <span>now playing . . .</span>
+                    <span class="status-pulse" id="status-dot"></span>
+                    <span id="status-text">now playing . . .</span>
                 </div>
-                <div class="embed-player-wrapper">
-                    <div class="player-placeholder">
-                        <P>Spotify Embed Player</P>
+                <div class="embed-player-wrapper" id="player-container">
+                    <div class="player-resting">
+                        <span class="resting-icon">💤</span>
+                        <p class="resting-text">resting . . .</p>
                     </div>
                 </div>
             </div>
@@ -109,6 +130,34 @@
         </section>
     </main>
 
+    <button class="music-icon" title="Click to play • Double-click for the song" aria-label="Toggle background music">
+
+        <svg class="icon-playing" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-audio-lines preview-icon">
+            <path d="M2 10v3" />
+            <path d="M6 6v11" />
+            <path d="M10 3v18" />
+            <path d="M14 8v7" />
+            <path d="M18 5v13" />
+            <path d="M22 10v3" />
+        </svg>
+
+        <svg class="icon-muted" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-audio-lines-off preview-icon">
+            <path d="M10 10v11" />
+            <path d="M10 3v1.35" />
+            <path d="M14 14v1" />
+            <path d="M14 8v.35" />
+            <path d="M18 5v7.35" />
+            <path d="M2 10v3" />
+            <path d="m2 2 20 20" />
+            <path d="M22 10v3" />
+            <path d="M6 6v11" />
+        </svg>
+    </button>
+    <audio id="bg-audio" src="public/bg-music/bg-music1(Kiss Me Again).mp3" loop preload="auto"></audio>
 
     <script src="index.js"></script>
 </body>
