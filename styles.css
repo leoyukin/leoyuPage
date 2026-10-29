@@ -64,8 +64,8 @@ body {
         radial-gradient(1px 1px at 120px 55px, #ffffff, transparent),
         radial-gradient(1px 1px at 160px 40px, #ffffff, transparent),
         radial-gradient(1px 1px at 220px 190px, #ffffff, transparent),
-        radial-gradient(1px 1px at 230px 100px, #ffffff, transparent),
-        radial-gradient(1px 1px at 280px 90px, #ffffff, transparent);
+        radial-gradient(1px 1px at 100px 200px, #ffffff, transparent),
+        radial-gradient(1px 1px at 210px 90px, #ffffff, transparent);
 
     background-size: 220px 220px;
     animation: twinkle 4s ease-in-out infinite;
@@ -76,9 +76,11 @@ body {
         radial-gradient(1.5px 1.5px at 50px 75px, #ffffff, transparent),
         radial-gradient(1.5px 1.5px at 65px 40px, #ffffff, transparent),
         radial-gradient(1.5px 1.5px at 110px 125px, #ffffff, transparent),
-        radial-gradient(1.5px 1.5px at 190px 140px, rgba(255, 255, 255, 0.9), transparent),
-        radial-gradient(2px 2px at 260px 220px, #ffffff, transparent);
-    background-size: 340px 340px;
+        radial-gradient(1.5px 1.5px at 190px 140px, #ffffff, transparent),
+        radial-gradient(2px 2px at 260px 220px, #ffffff, transparent),
+        radial-gradient(2px 2px at 220px 160px, #ffffff, transparent),
+        radial-gradient(2px 2px at 300px 185px, #ffffff, transparent);
+    background-size: 320px 320px;
     animation: twinkle 6s ease-in-out infinite 2s;
 }
 
@@ -101,7 +103,7 @@ body {
     }
 
     50% {
-        opacity: 0.1;
+        opacity: 0.15;
     }
 
     100% {
@@ -162,6 +164,78 @@ body {
 
 }
 
+.ambient-glow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px inset solid #0c0c0c;
+    box-shadow:
+        inset 0 0 5px hsl(0, 0%, 66%),
+        inset 0 0 10px #d3d3d3,
+        inset 0 0 20px #c7c7c7,
+        0 0 40px #c9c9c9;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, scale 0.3s ease;
+}
+
+.mouse-bear {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 50;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+}
+
+
+.ambient-glow.wandering,
+.mouse-bear.wandering {
+    transition: transform 2s ease-in-out;
+}
+
+.mouse-active {
+
+    transform: scale(0.85) !important;
+}
+
+.mouse-f {
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.mouse-f img {
+
+    opacity: 0.35;
+    display: block;
+    transition: transform 0.35s cubic-bezier(0.42, 0, 0.58, 1) ease-out;
+    transform-origin: center bottom;
+}
+
+.mouse-f.idle {
+    animation: idle-breathe 2.5s ease-in-out infinite;
+}
+
+@keyframes idle-breathe {
+
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.04);
+        /* Inhales and floats slightly */
+    }
+}
 
 .bio-grid {
     display: grid;
@@ -549,4 +623,67 @@ p {
     border-color: var(--ac-emerald);
     box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
     color: var(--ac-emerald);
+}
+
+.toast,
+.toast-conf {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.55rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--border-subtle);
+    border-radius: 6px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    font-size: 0.45rem;
+    color: var(--text-primary);
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+
+    pointer-events: auto;
+}
+
+.toast-container {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 100;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    pointer-events: none;
+}
+
+.toast.show,
+.toast-conf.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.toast-conf .t-btn:hover {
+    transform: scale(1.05);
+}
+
+
+.toast-conf .t-btn {
+    padding: 0.3rem 0.45rem;
+    border-radius: 6px;
+    font-size: 0.55rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.toast-conf .t-btn.confirm {
+    background: var(--ac-emerald);
+    color: #000;
+}
+
+.toast-conf .t-btn.cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
 }
