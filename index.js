@@ -9,6 +9,7 @@ const mouseFollow = document.querySelector('.ambient-glow');
 const mouseBear = document.querySelector('.mouse-bear');
 const mouseIcon = document.querySelector('.mouse-f');
 const bearImg = document.querySelector('.mouse-f img');
+let currentPlaybackState = null;
 let lastX = 0;
 let lastY = 0;
 let idleTimer;
@@ -156,11 +157,15 @@ async function updateLanStat() {
 
         if (data && data.listening_to_spotify) {
             const spotify = data.spotify;
+            const trackId = data.spotify.track_id;
 
-            statusText.textContent = 'now playing . . .';
-            statusDot.className = 'status-pulse-live';
+            if (currentPlaybackState !== trackId) {
+                currentPlaybackState = trackId;
 
-            playerContainer.innerHTML = `
+                statusText.textContent = 'now playing . . .';
+                statusDot.className = 'status-pulse-live';
+
+                playerContainer.innerHTML = `
                     <div class="spotify-track-card">
           <img src="${spotify.album_art_url}" alt="Album Art" class="track-album-art">
           <div class="track-details">
@@ -169,16 +174,22 @@ async function updateLanStat() {
           </div>
         </div>
             `;
+            }
         } else {
-            statusText.textContent = 'resting';
-            statusDot.className = 'status-pulse-resting';
 
-            playerContainer.innerHTML = `
-                    <div class="player-resting">
-          <span class="resting-icon">💤</span>
-          <p class="resting-text">resting</p>
-        </div>
-            `;
+            if (currentPlaybackState !== 'resting') {
+                currentPlaybackState = 'resting';
+                statusText.textContent = 'Sleeping . . .';
+                statusDot.className = 'status-pulse-resting';
+
+                playerContainer.innerHTML = `
+  <div class="player-resting-card">
+    <img src="public/status/resting-banner.jpg" alt="Sleeping" class="resting-banner-img">
+    <div class="resting-banner-overlay">
+    </div>
+  </div>
+`;
+            }
         }
     } catch (err) {
         console.error(err);
