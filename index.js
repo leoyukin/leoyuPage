@@ -9,6 +9,8 @@ const mouseFollow = document.querySelector('.ambient-glow');
 const mouseBear = document.querySelector('.mouse-bear');
 const mouseIcon = document.querySelector('.mouse-f');
 const bearImg = document.querySelector('.mouse-f img');
+let progressInterval = null;
+let currentTrackStart = null;
 let currentPlaybackState = null;
 let lastX = 0;
 let lastY = 0;
@@ -16,6 +18,11 @@ let idleTimer;
 let wanderInterval;
 let tiltTimeOut;
 let currentDirection = 'right';
+const WAVE_HEIGHTS = [
+    30, 50, 75, 40, 85, 100, 60, 45, 70, 90,
+    55, 80, 100, 65, 40, 75, 95, 60, 85, 70,
+    50, 65, 40, 25
+];
 
 musicE1.addEventListener("click", () => {
     if (!audio.paused) {
@@ -158,38 +165,64 @@ async function updateLanStat() {
         if (data && data.listening_to_spotify) {
             const spotify = data.spotify;
             const trackId = data.spotify.track_id;
+            const startTime = spotify.timestamps.start;
+            const endTime = spotify.timestamps.end;
 
             if (currentPlaybackState !== trackId) {
                 currentPlaybackState = trackId;
 
-                statusText.textContent = 'now playing . . .';
+                statusText.textContent = 'now playing';
+                statusText.classList.add('py');
                 statusDot.className = 'status-pulse-live';
 
                 playerContainer.innerHTML = `
                     <div class="spotify-track-card">
+            <img src="${spotify.album_art_url}" alt="Album Art" class="track-album-art album-backdrop">
+                  <div class="album-sleeve">
           <img src="${spotify.album_art_url}" alt="Album Art" class="track-album-art">
+      </div>
           <div class="track-details">
             <p class="track-title">${spotify.song}</p>
             <p class="track-artist">${spotify.artist}</p>
-          </div>
+        <!-- Progress Bar & Timestamps -->
+        <div class="track-progress-container">
+                 <div class="track-waveform" id="track-waveform">
+                         ${generateWaveformHTML()}
+            </div>
+            <div class="progress-times">
+                <span id="time-current">0:00</span>
+                <span id="time-total">0:00</span>
+            </div>
         </div>
+    </div>
+</div>
             `;
+                if (!currentTrackStart || Math.abs(currentTrackStart - startTime) > 1500) {
+                    currentTrackStart = startTime;
+                    startProgressTimer(startTime, endTime);
+                }
             }
         } else {
 
             if (currentPlaybackState !== 'resting') {
                 currentPlaybackState = 'resting';
+                currentTrackStart = null;
                 statusText.textContent = 'Sleeping . . .';
                 statusDot.className = 'status-pulse-resting';
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                    progressInterval = null;
+                }
 
                 playerContainer.innerHTML = `
   <div class="player-resting-card">
-    <img src="public/status/resting-banner.jpg" alt="Sleeping" class="resting-banner-img">
+    <img src="public/status/resting-banner.gif" alt="Sleeping" class="resting-banner-img">
     <div class="resting-banner-overlay">
     </div>
   </div>
 `;
             }
+
         }
     } catch (err) {
         console.error(err);
@@ -271,6 +304,58 @@ function createCToast(message, onConfirm) {
 
 }
 
+function startProgressTimer(starTime, endTime) {
+    if (progressInterval)
+        clearInterval(progressInterval);
+
+    const currentTime = document.getElementById('time-current');
+    const timeTotal = document.getElementById('time-total');
+    const totalDuration = endTime - starTime;
+
+    if (timeTotal) timeTotal.textContent = formatTime(totalDuration);
+
+    const update = () => {
+        const now = Date.now();
+
+        const elapsed = Math.max(0, Math.min(now - starTime, totalDuration));
+        const progressRatio = elapsed / totalDuration;
+
+        const bars = document.querySelectorAll('.wave-bar');
+        const activeIndex = Math.floor(progressRatio * bars.length);
+
+        bars.forEach((bar, index) => {
+            if (index < activeIndex) {
+                bar.classList.add('played');
+                bar.classList.remove('current');
+            } else if (index === activeIndex) {
+                bar.classList.add('played', 'current');
+            } else {
+                bar.classList.remove('played', 'current');
+            }
+        });
+
+        if (currentTime) currentTime.textContent = formatTime(elapsed);
+        if (elapsed >= totalDuration) {
+            clearInterval(progressInterval);
+        }
+    };
+    update();
+    progressInterval = setInterval(update, 1000);
+}
+
+
+function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+function generateWaveformHTML() {
+    return WAVE_HEIGHTS
+        .map(h => `<span class="wave-bar" style="height: ${h}%"></span>`)
+        .join('');
+}
 
 updateLanStat();
 setInterval(updateLanStat, 10000);

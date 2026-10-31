@@ -22,7 +22,7 @@
     <div class="ambient-glow" aria-hidden="true"></div>
     <div class="mouse-bear" aria-hidden="true">
         <span class="mouse-f idle">
-            <img src="public/svg/bear.svg" aria-hidden="true" width="50px" height="50px">
+            <img src="public/svg/bear.svg" aria-hidden="true" width="65px" height="65px">
         </span>
     </div>
 
@@ -72,7 +72,7 @@
                 <div class="card more-info-card">
                     <span class="card-tag bio-tag">Status<span class="e-tag">:</span></span>
                     <ul class="info-list">
-                        <li><img src="public/status/status1.jpg" alt="status"></li>
+                        <li><img src="public/status/status2.jpg" alt="status"></li>
                     </ul>
                 </div>
             </div>
@@ -81,8 +81,16 @@
 
             <div class="card now-playing-card">
                 <div class="now-playing-label">
-                    <span class="status-pulse" id="status-dot"></span>
-                    <span id="status-text">now playing . . .</span>
+                    <span class="status-pulse" id="status-dot">
+                    </span>
+                    <span id="status-text">now playing</span>
+                    <span class="status-eq" id="status-eq">
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                    </span>
+
                 </div>
                 <div class="embed-player-wrapper" id="player-container">
                     <div class="player-resting">
@@ -99,13 +107,11 @@
 
             <article class="card topic-card">
                 <header class="card-header">
-                    <span class="card-tag">Heavy Rotation</span>
-                    <h2 class="card-title">Favorite Artists</h2>
+                    <span class="card-tag">-</span>
+                    <h2 class="card-title">-</h2>
                 </header>
                 <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia illo repudiandae obcaecati
-                        rerum facere explicabo ad doloremque minus! Saepe porro dolorum veritatis fugit, voluptatibus
-                        incidunt non fuga facilis nostrum quas.</p>
+                    <p>-</p>
                 </div>
             </article>
 
@@ -113,26 +119,22 @@
 
             <article class="card topic-card">
                 <header class="card-header">
-                    <span class="card-tag">Aesthetics</span>
-                    <h2 class="card-title">Genres & Subgenres</h2>
+                    <span class="card-tag">-</span>
+                    <h2 class="card-title">-</h2>
                 </header>
                 <div class="card-body">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet porro eum pariatur, perspiciatis,
-                        incidunt earum eligendi consequatur mollitia sapiente quaerat nobis libero culpa veritatis
-                        repudiandae voluptatum saepe iure, iusto dolorum?</p>
+                    <p>-</p>
                 </div>
             </article>
 
             <!-- Card 3: Favorite Tracks -->
             <article class="card topic-card">
                 <header class="card-header">
-                    <span class="card-tag">Soundtrack</span>
-                    <h2 class="card-title">Favorite Tracks</h2>
+                    <span class="card-tag">-</span>
+                    <h2 class="card-title">-</h2>
                 </header>
                 <div class="card-body">
-                    <P>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, ratione cupiditate aut voluptatum
-                        eos repellendus. Deleniti, dolore dignissimos commodi temporibus sequi ullam sit voluptatum
-                        consequuntur quaerat enim dolorem ab aliquam.</P>
+                    <P>-</P>
                 </div>
             </article>
         </section>
@@ -140,7 +142,7 @@
 
     <button class="music-icon" title="Click to play • Double-click for the song" aria-label="Toggle background music">
 
-        <svg class="icon-playing" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+        <svg class="icon-playing" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-audio-lines preview-icon">
             <path d="M2 10v3" />
@@ -151,7 +153,7 @@
             <path d="M22 10v3" />
         </svg>
 
-        <svg class="icon-muted" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+        <svg class="icon-muted" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-audio-lines-off preview-icon">
             <path d="M10 10v11" />
