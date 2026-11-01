@@ -357,5 +357,23 @@ function generateWaveformHTML() {
         .join('');
 }
 
+function initStatusSlideshow() {
+    const slides = document.querySelectorAll('.status-slide');
+    if (slides.length <= 1) return;
+
+    let currenSlideIndex = 0;
+
+    slides.forEach((slide) => {
+        slide.addEventListener('animationend', () => {
+            slide.classList.remove('active');
+
+            currenSlideIndex = (currenSlideIndex + 1) % slides.length;
+
+            slides[currenSlideIndex].classList.add('active');
+        });
+    });
+}
+
+initStatusSlideshow();
 updateLanStat();
 setInterval(updateLanStat, 10000);

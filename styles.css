@@ -357,6 +357,45 @@ p {
     width: 100%;
 }
 
+.status-gallery {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #00000004;
+}
+
+.status-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.status-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: twinkle-slide 10s ease-in-out forwards;
+}
+
+@keyframes twinkle-slide {
+    0% {
+        opacity: 0.15;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.15;
+    }
+}
+
 .info-list img {
     width: 100%;
     height: 100%;
