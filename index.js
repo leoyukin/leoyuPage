@@ -23,6 +23,15 @@ const WAVE_HEIGHTS = [
     55, 80, 100, 65, 40, 75, 95, 60, 85, 70,
     50, 65, 40, 25
 ];
+const cThoughts = [
+    "fahh . . .",
+    "bluff . . .",
+    "damn i love her . . .",
+    "huh . . . ?",
+    "uff . . .",
+    "hhhh . . .",
+    "wait . . . !"
+];
 
 musicE1.addEventListener("click", () => {
     if (!audio.paused) {
@@ -374,6 +383,26 @@ function initStatusSlideshow() {
     });
 }
 
+function initThoughtLoop() {
+    const thoughtSpan = document.querySelector('.thought-bubble span');
+
+    if (!thoughtSpan || cThoughts.length <= 1) return;
+
+    let thoughtIndex = 0;
+
+    setInterval(() => {
+        thoughtSpan.classList.add('fade-out');
+
+        setTimeout(() => {
+            thoughtIndex = (thoughtIndex + 1) % cThoughts.length;
+            thoughtSpan.textContent = cThoughts[thoughtIndex];
+            thoughtSpan.classList.remove('fade-out')
+        }, 400);
+
+    }, 8000);
+}
+
 initStatusSlideshow();
+initThoughtLoop();
 updateLanStat();
 setInterval(updateLanStat, 10000);
