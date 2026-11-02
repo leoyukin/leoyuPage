@@ -36,14 +36,14 @@ const cThoughts = [
 const PROFILE_LEOYU = {
     name: "Leoyu",
     handle: "@ayoyuta",
-    pfp: "public/pfp+banner/pfp3.jpg",
+    pfp: "public/pfp+banner/pfp7.jpg",
     banner: "public/pfp+banner/banner1.jpg"
 };
 
 const PROFILE_LILLY = {
     name: "Lilly",
-    handle: "@abcdefg",
-    pfp: "public/pfp+banner/pfp2.jpg",
+    handle: "@denied",
+    pfp: "public/pfp+banner/pfp33.jpg",
     banner: "public/pfp+banner/banner5.gif"
 }
 
@@ -444,19 +444,19 @@ function initPersonaSwitch() {
             isAlter = true;
             applyProfile(PROFILE_LILLY);
             switchBtn.classList.add('active');
-            createToast("SWITCH");
+            createToast("s w i t c h e d");
 
             alterTimeout = setTimeout(() => {
                 isAlter = false;
                 applyProfile(PROFILE_LEOYU);
-                createToast("REVERTED");
-            }, 10000);
+                createToast("s w a p p e d");
+            }, 12000);
         }
         else {
             isAlter = false;
             applyProfile(PROFILE_LEOYU);
             switchBtn.classList.remove('active');
-            createToast("REVERTED");
+            createToast("s w a p p e d");
         }
 
     })

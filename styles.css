@@ -691,7 +691,7 @@ p {
 }
 
 .persona-switch-btn:hover {
-    transform: scale(1.12) rotate(15deg);
+    transform: scale(1.5) rotate(15deg);
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.4);
     background: rgba(21, 15, 35, 0.7);
