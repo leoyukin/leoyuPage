@@ -33,6 +33,23 @@ const cThoughts = [
     "wait . . . !"
 ];
 
+const PROFILE_LEOYU = {
+    name: "Leoyu",
+    handle: "@ayoyuta",
+    pfp: "public/pfp+banner/pfp3.jpg",
+    banner: "public/pfp+banner/banner1.jpg"
+};
+
+const PROFILE_LILLY = {
+    name: "Lilly",
+    handle: "@abcdefg",
+    pfp: "public/pfp+banner/pfp2.jpg",
+    banner: "public/pfp+banner/banner5.gif"
+}
+
+let isAlter = false;
+let alterTimeout = null;
+
 musicE1.addEventListener("click", () => {
     if (!audio.paused) {
         audio.pause();
@@ -402,7 +419,51 @@ function initThoughtLoop() {
     }, 8000);
 }
 
+
+function applyProfile(data) {
+    const userName = document.querySelector('.user-name');
+    const userHandle = document.querySelector('.user-handle');
+    const avatarImg = document.querySelector('.avatar-img');
+    const bannerImg = document.querySelector('.banner-img');
+
+    if (userName) userName.textContent = data.name;
+    if (userHandle) userHandle.textContent = data.handle;
+    if (avatarImg) avatarImg.src = data.pfp;
+    if (bannerImg) bannerImg.src = data.banner;
+}
+
+
+function initPersonaSwitch() {
+    const switchBtn = document.getElementById('persona-switch-btn');
+    if (!switchBtn) return;
+
+    switchBtn.addEventListener('click', () => {
+        if (alterTimeout) clearTimeout(alterTimeout);
+
+        if (!isAlter) {
+            isAlter = true;
+            applyProfile(PROFILE_LILLY);
+            switchBtn.classList.add('active');
+            createToast("SWITCH");
+
+            alterTimeout = setTimeout(() => {
+                isAlter = false;
+                applyProfile(PROFILE_LEOYU);
+                createToast("REVERTED");
+            }, 10000);
+        }
+        else {
+            isAlter = false;
+            applyProfile(PROFILE_LEOYU);
+            switchBtn.classList.remove('active');
+            createToast("REVERTED");
+        }
+
+    })
+}
+
 initStatusSlideshow();
 initThoughtLoop();
 updateLanStat();
+initPersonaSwitch();
 setInterval(updateLanStat, 10000);

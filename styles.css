@@ -433,14 +433,15 @@ p {
 
 .user-meta img {
     margin-top: 2px;
-    margin-left: 2px;
+    margin-left: 32px;
     width: 16px;
     height: 16px;
     z-index: 4;
-    display: relative;
-    position: absolute;
+    display: flex;
+    position: relative;
     filter: opacity(1) brightness(0.5) saturate(120%);
     animation: twinkle 8s ease-in-out infinite;
+    pointer-events: n;
 
 }
 
@@ -667,6 +668,45 @@ p {
     padding: 0.25rem 0.45rem;
     border-radius: 25px;
     letter-spacing: 0.04em;
+}
+
+.persona-switch-btn {
+    position: absolute;
+    bottom: 0.65rem;
+    right: 0.65rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    opacity: 0.9;
+    border-radius: 50%;
+    background: 1px solid rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: rgba(15, 15, 15, 0.75);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.persona-switch-btn:hover {
+    transform: scale(1.12) rotate(15deg);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(21, 15, 35, 0.7);
+    box-shadow: 0 0 12px rgba(20, 20, 20, 0.6);
+}
+
+.persona-switch-btn:active {
+    transform: scale(0.9);
+}
+
+.persona-switch-btn.active {
+    background: var(--ac-white);
+    color: #050407;
+    border-color: #ffffff;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
 
