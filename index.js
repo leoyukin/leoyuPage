@@ -30,7 +30,9 @@ const cThoughts = [
     "huh . . . ?",
     "uff . . .",
     "hhhh . . .",
-    "wait . . . !"
+    "wait . . . !",
+    "so what are you . . .",
+    "what are you so afraid of . . . ?"
 ];
 
 const PROFILE_LEOYU = {
@@ -49,6 +51,7 @@ const PROFILE_LILLY = {
 
 let isAlter = false;
 let alterTimeout = null;
+let switchCooldown = false;
 
 musicE1.addEventListener("click", () => {
     if (!audio.paused) {
@@ -439,30 +442,83 @@ function initPersonaSwitch() {
 
     switchBtn.addEventListener('click', () => {
         if (alterTimeout) clearTimeout(alterTimeout);
+        if (switchCooldown) return;
+
+        switchCooldown = true;
+        switchBtn.classList.add('cooldown');
+
+        setTimeout(() => {
+            switchCooldown = false;
+            switchBtn.classList.remove('cooldown');
+        }, 2500);
 
         if (!isAlter) {
             isAlter = true;
             applyProfile(PROFILE_LILLY);
             switchBtn.classList.add('active');
-            createToast("s w i t c h e d");
+            document.body.classList.add('persona-lilly');
+
+            playSfx();
+            triggerGlitch("ス イ ッ チ");
 
             alterTimeout = setTimeout(() => {
                 isAlter = false;
                 applyProfile(PROFILE_LEOYU);
-                createToast("s w a p p e d");
+                switchBtn.classList.remove('active')
+                document.body.classList.remove('persona-lilly');
             }, 12000);
         }
         else {
             isAlter = false;
             applyProfile(PROFILE_LEOYU);
             switchBtn.classList.remove('active');
-            createToast("s w a p p e d");
+            document.body.classList.remove('persona-lilly');
         }
 
     })
 }
 
+function triggerGlitch(text) {
+    const overlay = document.getElementById('screen-g');
+    const label = document.getElementById('screen-p-text');
+    if (!overlay || !label) return;
+
+    label.textContent = text;
+    overlay.classList.add('active');
+    setTimeout(() => {
+        overlay.classList.remove('active');
+    }, 1280);
+}
+
+function playSfx() {
+    const sfx = document.getElementById('switch-sfx');
+    if (sfx) {
+        sfx.currentTime = 0;
+        sfx.volume = 0.35;
+        sfx.play().catch(err => console.log("Audio play error:", err));
+    }
+}
+
+function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+
+    const hidePreloader = () => {
+        preloader.classList.add('loaded');
+        setTimeout(() => {
+            preloader.remove();
+        }, 700);
+    }
+
+    window.addEventListener('load', () => {
+        setTimeout((hidePreloader, 300));
+    });
+
+    setTimeout(hidePreloader, 1800);
+}
+
 initStatusSlideshow();
+initPreloader();
 initThoughtLoop();
 updateLanStat();
 initPersonaSwitch();

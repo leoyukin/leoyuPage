@@ -17,6 +17,15 @@
 
 <body>
 
+    <!-- Preload Phase -->
+
+    <div class="preloader-overlay" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-spinner"></div>
+            <p class="preloader-text">Hold on . . .</p>
+        </div>
+    </div>
+
     <!-- MousePoint -->
 
     <div class="ambient-glow" aria-hidden="true"></div>
@@ -26,7 +35,7 @@
         </span>
     </div>
 
-    <!-- Star BG-->
+    <!-- Star BG -->
 
     <div class="stars-cont" aria-hidden="true">
         <div class="stars-layer stars-distant"></div>
@@ -148,6 +157,7 @@
             </article>
 
             <!-- Card 3: Favorite Tracks -->
+
             <article class="card topic-card">
                 <header class="card-header">
                     <span class="card-tag">-</span>
@@ -189,8 +199,13 @@
     </button>
     <audio id="bg-audio" src="public/bg-music/bg-music1(Kiss Me Again).mp3" loop preload="auto"></audio>
 
-    <div class="toast-container" id="toast-container"></div>
+    <!-- Toasts/Pop ups/SFX -->
 
+    <div class="toast-container" id="toast-container"></div>
+    <div class="screen-overlay" id="screen-g">
+        <h1 class="screen-p-text" id="screen-p-text">S o m e t h i n g</h1>
+    </div>
+    <audio id="switch-sfx" src="public/bg-music/switch.m4a" preload="auto"></audio>
     <script src="index.js"></script>
 </body>
 
