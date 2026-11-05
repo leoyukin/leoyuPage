@@ -52,7 +52,7 @@
             <div class="card profile-header-card">
                 <div class="profile-identity">
                     <div class="avatar-container">
-                        <img src="public/pfp+banner/pfp3.jpg" alt="Profile avatar" class="avatar-img">
+                        <img src="public/pfp+banner/pfp7.jpg" alt="Profile avatar" class="avatar-img">
                         <div class="avatar-overlay"></div>
                         <div class="thought-bubble">
                             <span>yeesh . . . </span>
@@ -70,8 +70,7 @@
                 </div>
 
                 <time class="profile-date" id="profile-date">Oct 27</time>
-                <button class="persona-switch-btn" id="persona-switch-btn" title="switch persona"
-                    aria-label="switch profile">
+                <button class="persona-switch-btn" id="persona-switch-btn" title="switch" aria-label="switch profile">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m16 3 4 4-4 4" />
@@ -87,21 +86,25 @@
             <div class="bio-grid">
                 <div class="card bio-card">
                     <span class="card-tag bio-tag">BIO<span class="e-tag">:</span></span>
-                    <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, nobis. Suscipit esse minus
-                        recusandae eveniet ratione error tempore. Officiis facilis alias necessitatibus fugit quod nihil
-                        numquam animi ipsa facere placeat.</P>
+                    <P>"Can <span class="calling-trigger" data-img="public/status/distant-m1.jpg"
+                            data-title="Memory 01">you</span> see me?<br>
+                        I'm waiting for the right <span class="calling-trigger" data-img="public/status/distant-m2.gif"
+                            data-title="Memory 02">time</span><br>
+                        I can't read you<br>
+                        But if you want<br>
+                        The pleasure's all <span class="calling-trigger" data-img="public/status/distant-m3.jpg"
+                            data-title="Memory 03">mine</span>"
+                    </P>
                 </div>
 
                 <div class="card more-info-card">
                     <span class="card-tag bio-tag">Status<span class="e-tag">:</span></span>
                     <div class="status-gallery" id="status-gallery">
-                        <img class="status-slide active" src="public/status/status2.jpg" alt="status">
-                        <img class="status-slide" src="public/status/status3.jpg" alt="status 2">
-                        <img class="status-slide" src="public/status/status3.jpg" alt="status 3">
-                        <img class="status-slide" src="public/status/status4.jpg" alt="status 4">
-                        <img class="status-slide" src="public/status/status5.jpg" alt="status 5">
-                        <img class="status-slide" src="public/status/status6.jpg" alt="status 6">
-                        <img class="status-slide" src="public/status/status7.jpg" alt="status 7">
+                        <img class="status-slide active" src="public/status/status-2.jpg" alt="status">
+                        <img class="status-slide" src="public/status/status-3.jpg" alt="status 2">
+                        <img class="status-slide" src="public/status/status-4.jpg" alt="status 3">
+                        <img class="status-slide" src="public/status/status-5.jpg" alt="status 4">
+                        <img class="status-slide" src="public/status/status-6.jpg" alt="status 5">
                     </div>
                 </div>
             </div>
@@ -206,6 +209,17 @@
         <h1 class="screen-p-text" id="screen-p-text">S o m e t h i n g</h1>
     </div>
     <audio id="switch-sfx" src="public/bg-music/switch.m4a" preload="auto"></audio>
+
+
+    <aside class="calling-card" id="calling-card" aria-hidden="true">
+        <div class="calling-card-inner">
+            <img src="" alt="Distant memory" class="calling-card-img" id="calling-img">
+        </div>
+    </aside>
+
+
+
+
     <script src="index.js"></script>
 </body>
 

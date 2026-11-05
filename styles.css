@@ -33,6 +33,7 @@ html {
     --text-name-f1: "Yellowtail";
     --text-p-f1: "Bitcount Prop Single";
     --text-u-handle: "Rock Salt";
+    --tb-text-color: rgba(255, 255, 255, 0.85);
 
 
     /* Ac Colors*/
@@ -49,6 +50,13 @@ html {
     --radius-lg: 20px;
     --radius-md: 12px;
     --radius-sm: 8px;
+    --av-bd: 4px solid rgba(255, 255, 255, 0.105);
+
+    /* Ambient Glow */
+    --ag-bs1: hsl(0, 0%, 66%);
+    --ag-bs2: #d3d3d3;
+    --ag-bs3: #c7c7c7;
+    --ag-bs4: #c9c9c9;
 
 }
 
@@ -121,6 +129,15 @@ body {
 
 body.persona-lilly .stars-cont {
     --star-color: #3ac7ff;
+}
+
+body.persona-lilly {
+    --av-bd: 4px solid rgba(58, 199, 255, 0.213);
+    --ag-bs1: hsl(203, 65%, 66%);
+    --ag-bs2: #35bdf3;
+    --ag-bs3: #37b4e6;
+    --ag-bs4: #2eaee0;
+    --tb-text-color: rgba(155, 215, 255, 0.85);
 }
 
 .stars-layer {
@@ -256,13 +273,13 @@ body.persona-lilly .stars-cont {
     background-color: transparent;
     border: 1px inset solid #0c0c0c;
     box-shadow:
-        inset 0 0 5px hsl(0, 0%, 66%),
-        inset 0 0 10px #d3d3d3,
-        inset 0 0 20px #c7c7c7,
-        0 0 40px #c9c9c9;
+        inset 0 0 5px var(--ag-bs1),
+        inset 0 0 10px var(--ag-bs2),
+        inset 0 0 20px var(--ag-bs3),
+        0 0 40px var(--ag-bs4);
     pointer-events: none;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out, scale 0.3s ease;
+    transition: box-shadow 0.2s ease-in-out, transform 0.1s ease-out, scale 0.3s ease;
 }
 
 .mouse-bear {
@@ -346,11 +363,17 @@ body.persona-lilly .stars-cont {
     font-style: italic;
     color: hsla(210, 60%, 98%, 0.904);
     overflow-y: auto;
-    font-weight: 500;
+    font-weight: 400;
     text-transform: unset;
     padding-right: 0.35rem;
     font-size: 0.85rem;
     line-height: 1.5;
+    text-align: center;
+    text-wrap: balance;
+    letter-spacing: 0.04em;
+    margin: auto 0;
+    padding: 0 0.75rem;
+    overflow-y: auto;
 }
 
 .bio-card p::-webkit-scrollbar {
@@ -436,6 +459,7 @@ p {
     opacity: 1;
     pointer-events: auto;
     animation: twinkle-slide 10s ease-in-out forwards;
+    pointer-events: none;
 }
 
 @keyframes twinkle-slide {
@@ -532,7 +556,7 @@ p {
     height: 105px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid rgba(255, 255, 255, 0.105);
+    border: var(--av-bd);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     display: block;
 }
@@ -616,10 +640,11 @@ p {
     font-size: 0.78rem;
     font-weight: 350;
     font-family: var(--text-title-f1), cursive;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--tb-text-color);
     letter-spacing: 0.08em;
     animation: tv-glitch 4s ease-in-out alternate-reverse infinite;
     margin-left: 1.5px;
+    transition: all ease-in-out;
 
 
 }
@@ -1456,4 +1481,66 @@ p {
     100% {
         transform: translate(0, 0) skewX(0deg);
     }
+}
+
+
+.calling-trigger {
+    color: var(--ac-lp1);
+    cursor: pointer;
+    font-weight: 460;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+    animation: tv-glitch 8s ease-in-out infinite alternate-reverse;
+    line-height: 1.8em;
+}
+
+.calling-trigger:hover {
+    color: rgba(33, 181, 233, 0.8);
+    text-shadow: 0 0 8px rgba(112, 214, 255, 0.2);
+}
+
+.calling-card {
+    position: fixed;
+    top: 50%;
+    right: 1.5rem;
+    z-index: 900;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(calc(-100% - 3rem)) scale(0.96);
+    opacity: 0;
+    filter: blur(0.5px);
+    transition: opacity 1.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 1.4s ease-out,
+        transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    ;
+}
+
+.calling-card.show {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.88;
+    transform: translateY(-50%) translateX(0) scale(1);
+    transition: opacity 0.3s ease-out,
+        filter 0.3s ease-out,
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.calling-card-inner {
+    width: 100%;
+    background: rgba(12, 12, 18, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-md);
+    padding: 2px;
+    box-shadow: 0 15px 35px -5px rgba(170, 170, 170, 0.5), 0 0 22px rgba(150, 150, 150, 0.25);
+    overflow: hidden;
+}
+
+.calling-card-img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: calc(var(--radius-md) - 4px);
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    animation: tv-glitch 4.5s ease-in-out infinite alternate-reverse;
 }

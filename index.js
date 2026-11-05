@@ -200,7 +200,7 @@ async function updateLanStat() {
             if (currentPlaybackState !== trackId) {
                 currentPlaybackState = trackId;
 
-                statusText.textContent = 'now playing';
+                statusText.textContent = 'NOW PLAYING';
                 statusText.classList.add('py');
                 statusDot.className = 'status-pulse-live';
 
@@ -450,7 +450,7 @@ function initPersonaSwitch() {
         setTimeout(() => {
             switchCooldown = false;
             switchBtn.classList.remove('cooldown');
-        }, 2500);
+        }, 3500);
 
         if (!isAlter) {
             isAlter = true;
@@ -459,7 +459,7 @@ function initPersonaSwitch() {
             document.body.classList.add('persona-lilly');
 
             playSfx();
-            triggerGlitch("ス イ ッ チ");
+            triggerGlitch("스 위 치");
 
             alterTimeout = setTimeout(() => {
                 isAlter = false;
@@ -507,7 +507,7 @@ function initPreloader() {
         preloader.classList.add('loaded');
         setTimeout(() => {
             preloader.remove();
-        }, 700);
+        }, 600);
     }
 
     window.addEventListener('load', () => {
@@ -517,9 +517,41 @@ function initPreloader() {
     setTimeout(hidePreloader, 1800);
 }
 
+function initCallingCards() {
+    const triggers = document.querySelectorAll('.calling-trigger');
+    const card = document.getElementById('calling-card');
+    const cardImg = document.getElementById('calling-img');
+    const cardTitle = document.getElementById('calling-title');
+
+    if (!card || triggers.length === 0) return;
+
+    let hideTimeout = null;
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener('pointerenter', () => {
+            if (hideTimeout) clearTimeout(hideTimeout);
+
+            const imgSrc = trigger.dataset.img;
+            const title = trigger.dataset.title || 'Memory';
+
+            if (imgSrc && cardImg) cardImg.src = imgSrc;
+            if (cardTitle) cardTitle.textContent = title;
+
+            card.classList.add('show');
+        });
+
+        trigger.addEventListener('pointerleave', () => {
+            hideTimeout = setTimeout(() => {
+                card.classList.remove('show');
+            }, 250);
+        });
+    });
+}
+
 initStatusSlideshow();
 initPreloader();
 initThoughtLoop();
 updateLanStat();
 initPersonaSwitch();
+initCallingCards();
 setInterval(updateLanStat, 10000);
