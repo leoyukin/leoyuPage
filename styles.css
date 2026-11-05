@@ -18,7 +18,7 @@ html {
 :root {
     /* BG Palette */
     --bg-canvas: #050407;
-    --bg-card: rgba(12, 12, 18, 0.521);
+    --bg-card: hsla(0, 0%, 0%, 0.010);
     --bg-carda1: hsl(265, 30%, 15%);
 
     --bg-subcard: #171a29;
@@ -45,7 +45,7 @@ html {
     --star-color: #ffffff;
 
     /* Borders & Radious */
-    --border-subtle: 1px solid rgba(255, 255, 255, 0.05);
+    --border-subtle: 1px solid rgba(255, 255, 255, 0.03);
     --border-highlight: 1px solid rgba(255, 255, 255, 0.10);
     --radius-lg: 20px;
     --radius-md: 12px;
@@ -221,6 +221,18 @@ body.persona-lilly {
     box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.15);
 }
 
+.topic-card {
+    background: hsla(0, 0%, 0%, 0.010);
+    opacity: 0.45;
+    transition: opacity 0.25s ease-in-out, scale 0.25s ease;
+}
+
+.topic-card:hover {
+    background: hsla(0, 0%, 0%, 0.014);
+    opacity: 1;
+}
+
+
 .dashboard-layout {
     display: flex;
     flex-direction: column;
@@ -390,26 +402,30 @@ body.persona-lilly {
 }
 
 .bio-card p::-webkit-scrollbar-thumb:hover {
-    background: var(--ac-white-);
+    background: var(--ac-white);
 }
 
 
 
 .card-tag {
     display: inline-block;
-    font-family: var(var(--text-title-f1)), 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: var(--text-title-f1), 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--ac-emerald);
+    color: var(--ac-white);
     margin-bottom: 0.5rem;
 }
 
 
 
 .card-title {
-    font-size: 1.35rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-self: center;
+    font-size: 2.35rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.75rem;
@@ -718,7 +734,7 @@ p {
 
     96% {
         transform: translate(-2px, 2px) skew(-0.5deg);
-        filter: drop-shadow(-2px - rgba(255, 255, 255, 0.5)) brightness(0.85);
+        filter: drop-shadow(-2px 0 rgba(255, 255, 255, 0.5)) brightness(0.85);
     }
 
     97% {
@@ -910,8 +926,8 @@ p {
 }
 
 .status-eq .eq-bar {
-    width: 5.5px;
-    height: 100%;
+    width: 6.5px;
+    height: 125%;
     background-color: var(--text-muted);
     border-radius: 1px;
     box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
@@ -1248,7 +1264,7 @@ p {
 }
 
 .wave-bar.played {
-    background: rgba(95, 16, 185, 0.8);
+    background: rgba(243, 233, 255, 0.8);
     box-shadow: 0 0 4px rgba(75, 15, 145, 0.4);
 }
 
@@ -1306,11 +1322,11 @@ p {
     position: fixed;
     bottom: 0.65rem;
     right: 0.65rem;
-    width: 74px;
-    height: 74px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: var(--bg-card);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -1318,7 +1334,7 @@ p {
 
 .music-icon:hover {
     transform: scale(1.04);
-    color: #fff;
+    color: #ffffff;
 }
 
 .music-icon:active {
@@ -1326,7 +1342,7 @@ p {
 }
 
 .playing {
-    border: 1px solid var(--ac-glow)
+    border: 2px solid var(--ac-white)
 }
 
 .music-icon .icon-muted {
@@ -1346,9 +1362,9 @@ p {
 }
 
 .music-icon.playing {
-    border-color: var(--ac-emerald);
+    border-color: var(--ac-white);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.750);
-    color: var(--ac-emerald);
+    color: var(--ac-hallow);
 }
 
 .toast,
@@ -1543,4 +1559,269 @@ p {
     display: block;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     animation: tv-glitch 4.5s ease-in-out infinite alternate-reverse;
+}
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.artist-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(14, 12, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.artist-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.8), 0 0 16px rgba(255, 255, 255, 0.05);
+}
+
+
+.artist-banner {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+}
+
+.artist-banner:hover {
+    animation: tv-glitch 5s alternate-reverse infinite;
+}
+
+.artist-album-backdrop {
+    position: absolute;
+    inset: -6px;
+    width: calc(100% + 20px);
+    height: calc((100% + 20px));
+    object-fit: cover;
+    filter: blur(6px) brightness(0.75) saturate(120%);
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.artist-card:hover .artist-album-backdrop {
+    transform: scale(1.1);
+    filter: blur(4px) brightness(0.8);
+}
+
+.artist-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(14, 12, 20, 0.6) 100%);
+}
+
+.artist-rank-pill {
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 2;
+    margin-top: -13px;
+    z-index: 4;
+    font-family: var(--text-title-f1), monospace;
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+}
+
+.artist-card:hover .artist-rank-pill {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.artist-card.rank-one .artist-rank-pill {
+    background: var(--ac-hallow);
+    color: #050407;
+    border-color: #ffffff5b;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.253);
+}
+
+.artist-avatar-container {
+    position: relative;
+    z-index: 2;
+    order: 1;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.artist-card:hover .artist-avatar-container {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.artist-pfp {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.artist-tray {
+    padding: 0.65rem 0.75rem;
+    background: rgba(10, 8, 16, 0.45);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+}
+
+.artist-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+}
+
+.artist-name {
+    font-size: 0.95rem;
+    font-weight: 550;
+    font-family: var(--text-name-f1), monospace;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.artist-genre {
+    font-size: 0.65rem;
+    font-weight: 350;
+    color: hsla(0, 0%, 100%, 0.521);
+    margin-top: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--text-title-f1), monospace;
+    letter-spacing: 0.1em;
+}
+
+.artist-fav-song {
+    font-size: 0.65rem;
+    color: var(--text-purp1);
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0.3rem;
+    letter-spacing: 0.1em;
+}
+
+.artist-links {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    justify-content: center;
+}
+
+.artists-tier-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto 1rem auto;
+    position: relative;
+    max-width: 520px;
+}
+
+.artists-tier-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+.artists-tier-divider span {
+    position: relative;
+    background: var(--bg-card);
+    padding: 0 0.8rem;
+    font-family: var(--text-title-f1), monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+}
+
+.artists-grid.top-tier {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 100%;
+    margin: 1.25rem auto 0 auto;
+}
+
+.artist-card.rank-one {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 620px;
+}
+
+.artists-grid.secondary-tier {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.artists-grid.secondary-tier .artist-card {
+    flex: 0 1 calc(33.333% - 0.95rem);
+    min-width: 260px;
+}
+
+.artists-grid.secondary-tier .artist-banner {
+    height: 320px;
+}
+
+.artists-grid.secondary-tier .artist-avatar-container {
+    width: 88px;
+    height: 88px;
+}
+
+.stream-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+}
+
+.stream-link:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
 }

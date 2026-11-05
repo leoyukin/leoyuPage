@@ -511,7 +511,7 @@ function initPreloader() {
     }
 
     window.addEventListener('load', () => {
-        setTimeout((hidePreloader, 300));
+        setTimeout(hidePreloader, 300);
     });
 
     setTimeout(hidePreloader, 1800);
