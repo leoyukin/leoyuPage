@@ -1,5 +1,6 @@
 const dateE1 = document.getElementById('profile-date');
-const DISCORD_ID = '666474255055323158';
+const _dId = (h) => h.split('').map(c => String.fromCharCode(c.charCodeAt(0) ^ 90)).join('');
+const DISCORD_ID = _dId('lllnmnhoojooihikob');
 const audio = document.getElementById('bg-audio');
 const musicE1 = document.querySelector('.music-icon');
 const userE1 = document.querySelector('.user-handle');
