@@ -1814,6 +1814,21 @@ p {
     height: 88px;
 }
 
+@media (max-width: 640px) {
+    .artists-grid.top-tier {
+        grid-template-columns: 1fr;
+    }
+
+    .artist-card.rank-one {
+        max-width: 100%;
+    }
+
+    .artists-grid.secondary-tier .artist-card {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+}
+
 .stream-icon {
     width: 20px;
     height: 20px;

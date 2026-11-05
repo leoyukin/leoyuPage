@@ -13,6 +13,7 @@ const bearImg = document.querySelector('.mouse-f img');
 let progressInterval = null;
 let currentTrackStart = null;
 let currentPlaybackState = null;
+let lanyardTimer = null;
 let lastX = 0;
 let lastY = 0;
 let idleTimer;
@@ -183,9 +184,13 @@ if (dateE1) {
 }
 
 async function updateLanStat() {
+
+    if (document.hidden) return;
     const statusDot = document.getElementById('status-dot');
     const statusText = document.getElementById('status-text');
     const playerContainer = document.getElementById('player-container');
+
+    let nextCheckDelay = 60000;
 
     try {
         const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
@@ -193,6 +198,7 @@ async function updateLanStat() {
         const { data } = await res.json();
 
         if (data && data.listening_to_spotify) {
+            nextCheckDelay = 10000;
             const spotify = data.spotify;
             const trackId = data.spotify.track_id;
             const startTime = spotify.timestamps.start;
@@ -267,7 +273,11 @@ async function copyToClipboard(text) {
         }
 
     } catch (err) {
-        console.error("Clipboard api failed.", err)
+        console.error("Clipboard api failed.", err);
+        nextCheckDelay = 30000;
+    } finally {
+        clearTimeout(lanyardTimer);
+        lanyardTimer = setTimeout(updateLanStat, nextCheckDelay);
     }
 }
 
@@ -549,10 +559,17 @@ function initCallingCards() {
     });
 }
 
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        updateLanStat();
+    } else {
+        clearTimeout(lanyardTimer);
+    }
+});
+
 initStatusSlideshow();
 initPreloader();
 initThoughtLoop();
 updateLanStat();
 initPersonaSwitch();
 initCallingCards();
-setInterval(updateLanStat, 10000);
